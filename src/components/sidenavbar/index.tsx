@@ -5,18 +5,20 @@ import { NavLink as Link } from "react-router-dom";
 import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
-import { getMovieCount } from "../../fetcher";
 
 interface NavIconProps {
   arrow?: boolean;
   search?: boolean;
 }
 
+interface SideNavMainLinkProps {
+  active?: boolean;
+}
+
 export default function SideNavBar() {
   const [activeSideBar] = useState();
 
   /* Write the necessary functions to show/hide the side bar on mobile devices */
-  getMovieCount();
 
   return (
     <SideNavBarCont className={activeSideBar && "visible"}>
@@ -28,7 +30,6 @@ export default function SideNavBar() {
         exact
       >
         Wesley
-        {/* Add types for the props of 'NavIcon' */}
         <NavIcon arrow></NavIcon>
       </SideNavMainLink>
       <SideNavMainLink
@@ -94,7 +95,7 @@ const SideNavMainLink = styled(Link)`
   color: white;
 
   &:hover {
-    background: ${colors.primaryColor}; 
+    background: ${colors.primaryColor};
   }
 `;
 
