@@ -94,7 +94,7 @@ const SideNavMainLink = styled(Link)`
   color: white;
 
   &:hover {
-    background: ${colors.sideNavBarHover}; 
+    background: ${colors.primaryColor}; 
   }
 `;
 
@@ -115,9 +115,9 @@ const NavIcon = styled.div<NavIconProps>`
         width: 30px;
         height: 30px;
         position: absolute;
-        right: 15px; /* Adjust positioning as needed */
+        right: 15px;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(-40%);
       }
     `}
 
@@ -133,9 +133,9 @@ const NavIcon = styled.div<NavIconProps>`
         width: 30px;
         height: 30px;
         position: absolute;
-        right: 15px; /* Adjust positioning as needed */
+        right: 15px;
         top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(-40%);
       }
     `}
 `;
@@ -150,10 +150,11 @@ const SideNavHeader = styled.div`
     content: '';
     position: absolute;
     bottom: 0;
-    left: 57%; 
+    padding-right: 35px:
     transform: translateX(-50%); 
-    width: 250px; 
+    width: 245px; 
     border-bottom: 0.5px solid white; 
+    margin-bottom: 5px
   }
 `;
 
@@ -161,6 +162,6 @@ const HeaderText = styled.div``;
 
 const NavLink = styled(Link)`
   display: block;
-  padding: 25px 35px;
+  padding: 10px 35px;
   color: white;
 `;
