@@ -92,6 +92,10 @@ const SideNavMainLink = styled(Link)`
   font-size: 1.6em;
   font-weight: 700;
   color: white;
+
+  &:hover {
+    background: ${colors.sideNavBarHover}; 
+  }
 `;
 
 const NavIcon = styled.div<NavIconProps>`
@@ -142,10 +146,21 @@ const SideNavHeader = styled.div`
   padding: 25px 35px;
   font-size: 1.6em;
   color: white;
+   &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%; /* Start the border at the center */
+    transform: translateX(-50%); /* Center the border */
+    width: 75%; /* Adjust this value to change the length of the border */
+    border-bottom: 0.5px solid white; /* Adjust the width, style, and color as needed */
+  }
 `;
 
 const HeaderText = styled.div``;
 
 const NavLink = styled(Link)`
   display: block;
+  padding: 25px 35px;
+  color: white;
 `;
