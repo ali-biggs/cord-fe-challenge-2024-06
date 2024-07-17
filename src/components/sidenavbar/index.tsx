@@ -150,10 +150,10 @@ const SideNavHeader = styled.div`
     content: '';
     position: absolute;
     bottom: 0;
-    left: 50%; /* Start the border at the center */
-    transform: translateX(-50%); /* Center the border */
-    width: 75%; /* Adjust this value to change the length of the border */
-    border-bottom: 0.5px solid white; /* Adjust the width, style, and color as needed */
+    left: 57%; 
+    transform: translateX(-50%); 
+    width: 250px; 
+    border-bottom: 0.5px solid white; 
   }
 `;
 
