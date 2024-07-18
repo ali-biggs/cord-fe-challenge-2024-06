@@ -3,18 +3,18 @@ import * as colors from "../../colors";
 import styled from "styled-components";
 
 type CheckBoxProps = {
-  genreTitle: string;
-  genreId: number;
+  label: number | string;
+  id: number | string;
 };
 
-export default function CheckBox({ genreTitle, genreId }: CheckBoxProps) {
+export default function CheckBox({ label, id }: CheckBoxProps) {
   // Create a custom checkbox component
   const [checked, setChecked] = useState<boolean>(false);
 
   return (
     <CheckboxCont>
       <Input />
-      <LabelText>{genreTitle}</LabelText>
+      <LabelText>{label}</LabelText>
     </CheckboxCont>
   );
 }

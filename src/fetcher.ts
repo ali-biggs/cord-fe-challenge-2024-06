@@ -102,7 +102,6 @@ export const getTotalMovieCount = async () => {
         },
       }
     );
-    console.log("popular response", response);
     return response.data.total_results;
   } catch (error) {
     console.log("Error retreiving popular movies: ", error);

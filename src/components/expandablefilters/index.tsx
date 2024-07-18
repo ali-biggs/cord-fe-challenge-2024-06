@@ -32,54 +32,50 @@ export default function ExpandableFilters({
   ratings,
   languages,
 }: ExpandableFiltersProps) {
-  const [filtersShown, setFiltersShown] = useState<boolean>(false);
   const [showGenres, setShowGenres] = useState<boolean>(true);
   const [showMinVote, setShowMinVote] = useState<boolean>(false);
   const [showLanguage, setShowLanguage] = useState<boolean>(false);
 
-  const handleClick = (filterType: string) => {
-    switch (filterType) {
-      case "genre":
-        setShowGenres((prev) => !prev);
-      case "minVote":
-        setShowGenres((prev) => !prev);
-      case "language":
-        setShowGenres((prev) => !prev);
-    }
-  };
-console.log("showGenres", showGenres)
   return (
     <>
       <SectionHeader>
         <ExpandableIcon
           expanded={showGenres}
-          onClick={() => handleClick("genre")}
+          onClick={() => setShowGenres((prev) => !prev)}
         />
         <SectionLabel>Select genre(s)</SectionLabel>
       </SectionHeader>
       <ExpandableSection expanded={showGenres}>
         {genres.map((genre) => {
-          return <Checkbox genreTitle={genre.name} genreId={genre.id} />;
+          return <Checkbox label={genre.name} id={genre.id} />;
         })}
       </ExpandableSection>
 
       <SectionHeader>
         <ExpandableIcon
           expanded={showMinVote}
-          onClick={() => handleClick("minVote")}
+          onClick={() => setShowMinVote((prev) => !prev)}
         />
         <SectionLabel>Select min. vote</SectionLabel>
       </SectionHeader>
-      <ExpandableSection></ExpandableSection>
+      <ExpandableSection>
+        {ratings.map((rating) => {
+          return <Checkbox label={rating.name} id={rating.id} />;
+        })}
+      </ExpandableSection>
 
       <SectionHeader>
         <ExpandableIcon
           expanded={showLanguage}
-          onClick={() => handleClick("language")}
+          onClick={() => setShowLanguage((prev) => !prev)}
         />
         <SectionLabel>Select language</SectionLabel>
       </SectionHeader>
-      <ExpandableSection></ExpandableSection>
+      <ExpandableSection expanded={showLanguage}>
+        {languages.map((language) => {
+          return <Checkbox label={language.name} id={language.id} />;
+        })}
+      </ExpandableSection>
     </>
   );
 }
@@ -93,13 +89,6 @@ const SectionHeader = styled.div`
 
 const SectionLabel = styled.div`
   font-weight: 200;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  margin-top: 10px;
 `;
 
 const ExpandableSection = styled.div<ExpandableSectionProps>`

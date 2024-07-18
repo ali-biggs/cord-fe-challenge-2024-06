@@ -36,11 +36,10 @@ export default function SearchFilters({
   return (
     <FiltersWrapper>
       <SearchFiltersCont marginBottom className="search_inputs_cont">
-        {/* Implement a SearchBar component and use it for both the keyword and the year inputs */}
+        <SearchBar />
       </SearchFiltersCont>
       <SearchFiltersCont>
         <CategoryTitle>Movies</CategoryTitle>
-        {/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
         <ExpandableFilters
           genres={genres}
           ratings={ratings}

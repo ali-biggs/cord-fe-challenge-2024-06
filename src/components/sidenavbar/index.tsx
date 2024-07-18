@@ -151,7 +151,7 @@ const SideNavHeader = styled.div`
     content: '';
     position: absolute;
     bottom: 0;
-    padding-right: 35px:
+    padding-right: 35px;
     transform: translateX(-50%); 
     width: 245px; 
     border-bottom: 0.5px solid white; 
