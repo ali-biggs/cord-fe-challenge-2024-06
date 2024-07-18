@@ -32,6 +32,7 @@ export default function ExpandableFilters({
   ratings,
   languages,
 }: ExpandableFiltersProps) {
+  console.log("ratings in ExpandableFilters", ratings)
   const [showGenres, setShowGenres] = useState<boolean>(true);
   const [showMinVote, setShowMinVote] = useState<boolean>(false);
   const [showLanguage, setShowLanguage] = useState<boolean>(false);
@@ -58,9 +59,9 @@ export default function ExpandableFilters({
         />
         <SectionLabel>Select min. vote</SectionLabel>
       </SectionHeader>
-      <ExpandableSection>
+      <ExpandableSection expanded={showMinVote}>
         {ratings.map((rating) => {
-          return <Checkbox label={rating.name} id={rating.id} />;
+          return <Checkbox label={rating.name.toString()} id={rating.id} />;
         })}
       </ExpandableSection>
 

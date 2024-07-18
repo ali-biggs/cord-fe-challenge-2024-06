@@ -3,7 +3,7 @@ import * as colors from "../../colors";
 import styled from "styled-components";
 
 type CheckBoxProps = {
-  label: number | string;
+  label: string;
   id: number | string;
 };
 
