@@ -55,8 +55,8 @@ export default function Discover() {
       ...prevState,
       results: popularMovies,
       genreOptions: movieGenres,
-      totalCount: totalCount
-    }))
+      totalCount: totalCount,
+    }));
   };
 
   useEffect(() => {
@@ -66,30 +66,38 @@ export default function Discover() {
   return (
     <DiscoverWrapper>
       <MobilePageTitle>Discover</MobilePageTitle>
-      <MovieFilters>
-        <SearchFilters
-          genres={genreOptions}
-          ratings={ratingOptions}
-          languages={languageOptions}
-          searchMovies={(keyword: string, year: number) =>
-            searchMovies(keyword, year)
-          }
-        />
-      </MovieFilters>
-      <MovieResults>
-        {totalCount > 0 && <TotalCounter>{totalCount} results</TotalCounter>}
-        <MovieList
-          movies={(results as []) || []}
-          genres={(genreOptions as []) || []}
-        />
-        {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
-      </MovieResults>
+      <GridContainer>
+        <MovieResults>
+          {totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
+          <MovieList
+            movies={(results as []) || []}
+            genres={(genreOptions as []) || []}
+          />
+          {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
+        </MovieResults>
+        <MovieFilters>
+          <SearchFilters
+            genres={genreOptions}
+            ratings={ratingOptions}
+            languages={languageOptions}
+            searchMovies={(keyword: string, year: number) =>
+              searchMovies(keyword, year)
+            }
+          />
+        </MovieFilters>
+      </GridContainer>
     </DiscoverWrapper>
   );
 }
 
 const DiscoverWrapper = styled.div`
   padding: 60px 35px;
+`;
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 16px;
 `;
 
 const TotalCounter = styled.div`

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 type CheckBoxProps = {
   genreTitle: string;
-  genreId: number
+  genreId: number;
 };
 
 export default function CheckBox({ genreTitle, genreId }: CheckBoxProps) {
@@ -39,7 +39,7 @@ const Input = styled.input.attrs({ type: "checkbox" })`
   cursor: pointer;
 
   &:checked {
-    background-colour: #fff;
+    background-color: #fff;
   }
 
   &:checked::after {
@@ -55,4 +55,6 @@ const Input = styled.input.attrs({ type: "checkbox" })`
   }
 `;
 
-const LabelText = styled.div``;
+const LabelText = styled.div`
+  font-weight: 300;
+`;

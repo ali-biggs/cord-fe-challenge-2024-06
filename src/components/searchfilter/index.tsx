@@ -41,7 +41,11 @@ export default function SearchFilters({
       <SearchFiltersCont>
         <CategoryTitle>Movies</CategoryTitle>
         {/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
-        <ExpandableFilters genres={genres} ratings={ratings} languages={languages} />
+        <ExpandableFilters
+          genres={genres}
+          ratings={ratings}
+          languages={languages}
+        />
       </SearchFiltersCont>
     </FiltersWrapper>
   );
@@ -64,4 +68,6 @@ const SearchFiltersCont = styled.div<SearchFiltersContProps>`
     `}
 `;
 
-const CategoryTitle = styled.div``;
+const CategoryTitle = styled.div`
+  margin-bottom: 10px;
+`;
