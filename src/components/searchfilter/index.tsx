@@ -12,7 +12,10 @@ interface SearchFiltersContProps {
 // Add types for the props of 'SearchFilters' and the styled component 'SearchFiltersCont'
 type SearchFiltersProps = {
   // genres, ratings, languages, searchMovies
-  genres: never[];
+  genres: {
+    id: number;
+    name: string;
+  }[];
   ratings: {
     id: number;
     name: number;
@@ -38,6 +41,7 @@ export default function SearchFilters({
       <SearchFiltersCont>
         <CategoryTitle>Movies</CategoryTitle>
         {/* Implement a component called "ExpandableFilters" and use it for the filter categories */}
+        <ExpandableFilters genres={genres} ratings={ratings} languages={languages} />
       </SearchFiltersCont>
     </FiltersWrapper>
   );

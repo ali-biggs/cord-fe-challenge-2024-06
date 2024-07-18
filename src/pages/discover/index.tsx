@@ -49,11 +49,13 @@ export default function Discover() {
   const initialLoad = async () => {
     const popularMovies = await fetcher.getPopularMovies();
     const movieGenres = await fetcher.getGenreOptions();
+    const totalCount = await fetcher.getTotalMovieCount();
 
     setState((prevState) => ({
       ...prevState,
       results: popularMovies,
-      genreOptions: movieGenres
+      genreOptions: movieGenres,
+      totalCount: totalCount
     }))
   };
 
