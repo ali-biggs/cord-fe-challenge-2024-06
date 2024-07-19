@@ -63,8 +63,8 @@ const MovieItemWrapper = styled.div`
   border-radius: 3px;
   display: grid;
   grid-template-columns: 0.5fr 2fr;
-  grid-gap: 1px;
-  padding: 10px;
+  grid-gap: 2px;
+  padding: 20px;
 `;
 
 const LeftCont = styled.div`
@@ -78,6 +78,7 @@ const MoviePoster = styled.img`
 
 const RightCont = styled.div`
   display: inline-block;
+
 `;
 
 const MovieHeader = styled.div`
@@ -116,13 +117,14 @@ const Genre = styled.div`
 
 const MovieDescription = styled.div`
   display: inline-block;
+  padding-top: 10px;
   padding-left: 15px;
   padding-right: 15px;
   color: ${colors.fontColor};
 `;
 
 const MovieRelease = styled.div`
-  margin-top: 20px;
+  padding-top: 40px;
   padding-left: 15px;
   font-size: 0.8em;
   font-weight: 500;
