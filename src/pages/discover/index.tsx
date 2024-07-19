@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-
 import * as colors from "../../colors";
-import * as fetcher from "../../fetcher";
+import * as fetcher from "../../utils/fetcher";
+import useMediaQuery from "../../utils/useMediaQuery";
 
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
@@ -32,6 +32,8 @@ export default function Discover() {
     ],
   });
 
+  const isMobile = useMediaQuery("(max-width: 480px)");
+
   const searchMovies = async (keyword: string, year: number) => {
     // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
   };
@@ -50,14 +52,14 @@ export default function Discover() {
     const popularMovies = await fetcher.getPopularMovies();
     const movieGenres = await fetcher.getGenreOptions();
     const totalCount = await fetcher.getTotalMovieCount();
-    const languageOptions = await fetcher.getLanguageOptions()
+    const languageOptions = await fetcher.getLanguageOptions();
 
     setState((prevState) => ({
       ...prevState,
       results: popularMovies,
       genreOptions: movieGenres,
       totalCount: totalCount,
-      languageOptions: languageOptions
+      languageOptions: languageOptions,
     }));
   };
 
@@ -67,7 +69,8 @@ export default function Discover() {
 
   return (
     <DiscoverWrapper>
-      {/* <MobilePageTitle>Discover</MobilePageTitle> */}
+      {isMobile && <MobilePageTitle>Discover</MobilePageTitle>}
+
       {totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
       <GridContainer>
         <MovieResults>
@@ -92,24 +95,55 @@ export default function Discover() {
   );
 }
 
+const breakpoints = {
+  mobile: "480px",
+  desktop: "1024px",
+};
+
+const media = {
+  mobile: `(max-width: ${breakpoints.mobile})`,
+  desktop: `(max-width: ${breakpoints.desktop})`,
+};
+
 const DiscoverWrapper = styled.div`
   padding: 60px 35px;
+
+  @media ${media.mobile} {
+    padding: 20px;
+  }
 `;
 
 const GridContainer = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 16px;
+
+  @media ${media.mobile} {
+    /* display: flex;
+    flex-direction: column; */
+
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 `;
 
 const TotalCounter = styled.div`
   font-weight: 200;
   font-size: 0.8em;
   padding-bottom: 15px;
+
+  @media ${media.mobile} {
+    display: none;
+  }
 `;
 
 const MovieResults = styled.div``;
 
 const MovieFilters = styled.div``;
 
-const MobilePageTitle = styled.header``;
+const MobilePageTitle = styled.header`
+  @media ${media.mobile} {
+    display: visibile;
+    background-color: lightcoral;
+  }
+`;

@@ -5,16 +5,18 @@ import { NavLink as Link } from "react-router-dom";
 import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
+import useMediaQuery from "../../utils/useMediaQuery";
 
 interface NavIconProps {
   arrow?: boolean;
   search?: boolean;
-};
+}
 
 export default function SideNavBar() {
   const [activeSideBar] = useState();
 
   /* Write the necessary functions to show/hide the side bar on mobile devices */
+  const isMobile = useMediaQuery("(max-width: 480px)");
 
   return (
     <SideNavBarCont className={activeSideBar && "visible"}>
@@ -74,12 +76,26 @@ export default function SideNavBar() {
   );
 }
 
+const breakpoints = {
+  mobile: "480px",
+  desktop: "1024px",
+};
+
+const media = {
+  mobile: `(max-width: ${breakpoints.mobile})`,
+  desktop: `(max-width: ${breakpoints.desktop})`,
+};
+
 const SideNavBarCont = styled.div`
   position: fixed;
   z-index: 9;
   width: 280px;
   height: 100%;
   background-color: ${colors.sideNavBar};
+
+  @media ${media.mobile} {
+    transform: translateX(-100%);
+  }
 `;
 
 const SideNavMainLink = styled(Link)`

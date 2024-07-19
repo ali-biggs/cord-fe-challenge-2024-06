@@ -36,7 +36,15 @@ const SearchWrapper = styled.div`
   margin-bottom: 10px;
 `;
 
-const KeyWordInput = styled.input.attrs({ type: "text" })`
+const KeyWordInput = styled.input.attrs({
+  type: "text",
+  placeholder: "Search for movies",
+})`
+  &::placeholder {
+    font-weight: 200;
+    color: ${colors.primaryColor};
+  }
+
   border: none;
   width: 100%;
   padding-top: 2px;
@@ -51,7 +59,10 @@ const KeyWordInput = styled.input.attrs({ type: "text" })`
   }
 `;
 
-const YearInput = styled.input.attrs({ type: "number", placeholder: "Year of release" })`
+const YearInput = styled.input.attrs({
+  type: "number",
+  placeholder: "Year of release",
+})`
   &::placeholder {
     font-weight: 200;
     color: ${colors.primaryColor};
@@ -65,7 +76,6 @@ const YearInput = styled.input.attrs({ type: "number", placeholder: "Year of rel
   color: ${colors.primaryColor};
   margin-bottom: 10px;
 
-
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -76,7 +86,7 @@ const YearInput = styled.input.attrs({ type: "number", placeholder: "Year of rel
 
   &:focus {
     outline: none;
-    border: none; 
+    border: none;
   }
 `;
 
