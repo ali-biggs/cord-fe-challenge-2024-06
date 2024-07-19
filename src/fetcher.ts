@@ -3,11 +3,11 @@ import axios from "axios";
 export const getGenreOptions = async (languageCode: string = "en") => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/genre/movie/list?language=${languageCode}`,
+      `${process.env.REACT_APP_TMDB_PUBLIC_URL}/genre/movie/list?language=${languageCode}`,
       {
         headers: {
           accept: "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTdlMjRhMjNkZDBkM2YxODgyZjI3NjNlYTE2NWE4NiIsIm5iZiI6MTcyMTIwMjQ5Mi4zMzI3OTYsInN1YiI6IjY2OTc3NjZmZWMzYzIxODljZTUwODEyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sZ_kvnjhjqeBNXC9eDFFk5oYN5FND6lrjDzL8K3KD6Q`,
+          Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
         },
       }
     );
@@ -20,11 +20,11 @@ export const getGenreOptions = async (languageCode: string = "en") => {
 export const getLanguageOptions = async () => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/configuration/languages`,
+      `${process.env.REACT_APP_TMDB_PUBLIC_URL}/configuration/languages`,
       {
         headers: {
           accept: "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTdlMjRhMjNkZDBkM2YxODgyZjI3NjNlYTE2NWE4NiIsIm5iZiI6MTcyMTIwMjQ5Mi4zMzI3OTYsInN1YiI6IjY2OTc3NjZmZWMzYzIxODljZTUwODEyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sZ_kvnjhjqeBNXC9eDFFk5oYN5FND6lrjDzL8K3KD6Q`,
+          Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
         },
       }
     );
@@ -38,15 +38,14 @@ export const getLanguageOptions = async () => {
 export const getMovieByMinVote = async (vote: number) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&vote_average.gte=${vote}&vote_average.lte=${vote}`,
+      `${process.env.REACT_APP_TMDB_PUBLIC_URL}/discover/movie?sort_by=popularity.desc&vote_average.gte=${vote}&vote_average.lte=${vote}`,
       {
         headers: {
           accept: "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTdlMjRhMjNkZDBkM2YxODgyZjI3NjNlYTE2NWE4NiIsIm5iZiI6MTcyMTIwMjQ5Mi4zMzI3OTYsInN1YiI6IjY2OTc3NjZmZWMzYzIxODljZTUwODEyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sZ_kvnjhjqeBNXC9eDFFk5oYN5FND6lrjDzL8K3KD6Q`,
+          Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
         },
       }
     );
-    console.log("min vote response", response);
     return response.data.results;
   } catch (error) {
     console.log("Error retreiving min vote: ", error);
@@ -54,18 +53,20 @@ export const getMovieByMinVote = async (vote: number) => {
   }
 };
 
-export const getMovieByKeywordAndYear = async (year?: number, keyword?: string) => {
+export const getMovieByKeywordAndYear = async (
+  year?: number,
+  keyword?: string
+) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie?year=${year}&sort_by=popularity.desc&with_keywords=${keyword}`,
+      `${process.env.REACT_APP_TMDB_PUBLIC_URL}/discover/movie?year=${year}&sort_by=popularity.desc&with_keywords=${keyword}`,
       {
         headers: {
           accept: "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTdlMjRhMjNkZDBkM2YxODgyZjI3NjNlYTE2NWE4NiIsIm5iZiI6MTcyMTIwMjQ5Mi4zMzI3OTYsInN1YiI6IjY2OTc3NjZmZWMzYzIxODljZTUwODEyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sZ_kvnjhjqeBNXC9eDFFk5oYN5FND6lrjDzL8K3KD6Q`,
+          Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
         },
       }
     );
-    console.log("year and keyword response", response);
     return response.data.results;
   } catch (error) {
     console.log("Error retreiving min vote: ", error);
@@ -76,11 +77,11 @@ export const getMovieByKeywordAndYear = async (year?: number, keyword?: string) 
 export const getPopularMovies = async () => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/popular`,
+      `${process.env.REACT_APP_TMDB_PUBLIC_URL}/movie/popular`,
       {
         headers: {
           accept: "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTdlMjRhMjNkZDBkM2YxODgyZjI3NjNlYTE2NWE4NiIsIm5iZiI6MTcyMTIwMjQ5Mi4zMzI3OTYsInN1YiI6IjY2OTc3NjZmZWMzYzIxODljZTUwODEyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sZ_kvnjhjqeBNXC9eDFFk5oYN5FND6lrjDzL8K3KD6Q`,
+          Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
         },
       }
     );
@@ -94,11 +95,11 @@ export const getPopularMovies = async () => {
 export const getTotalMovieCount = async () => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/discover/movie`,
+      `${process.env.REACT_APP_TMDB_PUBLIC_URL}/discover/movie`,
       {
         headers: {
           accept: "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTdlMjRhMjNkZDBkM2YxODgyZjI3NjNlYTE2NWE4NiIsIm5iZiI6MTcyMTIwMjQ5Mi4zMzI3OTYsInN1YiI6IjY2OTc3NjZmZWMzYzIxODljZTUwODEyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sZ_kvnjhjqeBNXC9eDFFk5oYN5FND6lrjDzL8K3KD6Q`,
+          Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
         },
       }
     );
@@ -112,11 +113,11 @@ export const getTotalMovieCount = async () => {
 export const getMovieDetails = async (id: number) => {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/${id}`,
+      `${process.env.REACT_APP_TMDB_PUBLIC_URL}/movie/${id}`,
       {
         headers: {
           accept: "application/json",
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NTdlMjRhMjNkZDBkM2YxODgyZjI3NjNlYTE2NWE4NiIsIm5iZiI6MTcyMTIwMjQ5Mi4zMzI3OTYsInN1YiI6IjY2OTc3NjZmZWMzYzIxODljZTUwODEyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sZ_kvnjhjqeBNXC9eDFFk5oYN5FND6lrjDzL8K3KD6Q`,
+          Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
         },
       }
     );
@@ -126,5 +127,3 @@ export const getMovieDetails = async (id: number) => {
     return error;
   }
 };
-
-
