@@ -15,18 +15,21 @@ type MovieItemProps = {
     release_date: string;
     genre_ids: number[];
   };
-  genreList: {id: number, name:string}[];
+  genreList: { id: number; name: string }[];
 };
 
 export default function MovieItem({ movie, genreList }: MovieItemProps) {
   console.log("movie in MovieItem", movie);
 
-  const getGenreLabels = (ids: number[], genreList: {id: number, name:string}[]): string => {
-    const unformattedLabels =  ids.map((id: number) => {
+  const getGenreLabels = (
+    ids: number[],
+    genreList: { id: number; name: string }[]
+  ): string => {
+    const unformattedLabels = ids.map((id: number) => {
       const genre = genreList.find((genre) => genre.id === id);
       return genre ? genre.name : "Unknown";
     });
-    const formattedLabels = unformattedLabels.join (" | ");
+    const formattedLabels = unformattedLabels.join(" | ");
     return formattedLabels;
   };
 
@@ -34,7 +37,10 @@ export default function MovieItem({ movie, genreList }: MovieItemProps) {
     // The MovieItemWrapper must be linked to the movie details popup
     <MovieItemWrapper>
       <LeftCont>
-        <MoviePoster src={`https://api.themoviedb.org/${movie.poster_path}`} />
+        <MoviePoster
+          alt="Movie poster image"
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+        />
       </LeftCont>
       <RightCont>
         <MovieHeader>
@@ -69,22 +75,6 @@ const MoviePoster = styled.img`
   width: 100%;
   height: auto;
 `;
-
-// const MoviePoster = styled.div<MoviePosterProps>`
-//   ${(props) =>
-//     props.imageUrl &&
-//     css`
-//       &::after {
-//         content: "";
-//         display: inline-block;
-//         background-image: url(${props.imageUrl});
-//         background-size: contain;
-//         background-repeat: no-repeat;
-//         width: 20px;
-//         height: 30px;
-//       }
-//     `}
-// `;
 
 const RightCont = styled.div`
   display: inline-block;
