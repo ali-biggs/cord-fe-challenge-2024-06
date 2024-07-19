@@ -28,8 +28,11 @@ export const getLanguageOptions = async () => {
         },
       }
     );
-    console.log("language response", response);
-    return response.data.results;
+    const formattedLanguageOptions = response.data.map((item: any) => ({
+      id: item.iso_639_1,
+      name: item.english_name
+    })).sort((a: any, b: any) => a.name.localeCompare(b.name));
+    return formattedLanguageOptions;
   } catch (error) {
     console.log("Error retreiving languages: ", error);
   }

@@ -9,11 +9,7 @@ import SearchWhite from "../../images/search-icon-white.png";
 interface NavIconProps {
   arrow?: boolean;
   search?: boolean;
-}
-
-interface SideNavMainLinkProps {
-  active?: boolean;
-}
+};
 
 export default function SideNavBar() {
   const [activeSideBar] = useState();
@@ -97,6 +93,10 @@ const SideNavMainLink = styled(Link)`
   &:hover {
     background: ${colors.primaryColor};
   }
+
+  &:active {
+    background: ${colors.primaryColor};
+  }
 `;
 
 const NavIcon = styled.div<NavIconProps>`
@@ -145,17 +145,19 @@ const SideNavHeader = styled.div`
   position: relative;
   display: block;
   padding: 25px 35px;
+  margin-bottom: 10px;
   font-size: 1.6em;
   color: white;
-   &::after {
-    content: '';
+  &::after {
+    content: "";
     position: absolute;
     bottom: 0;
-    padding-right: 35px;
-    transform: translateX(-50%); 
-    width: 245px; 
-    border-bottom: 0.5px solid white; 
-    margin-bottom: 5px
+    right: 0;
+    left: 0;
+    margin-left: 35px;
+    width: full;
+    border-bottom: 0.5px solid white;
+    margin-bottom: 5px;
   }
 `;
 
@@ -163,6 +165,8 @@ const HeaderText = styled.div``;
 
 const NavLink = styled(Link)`
   display: block;
-  padding: 10px 35px;
+  padding: 5px 35px;
+  font-size: 1.2em;
+  font-weight: 300;
   color: white;
 `;

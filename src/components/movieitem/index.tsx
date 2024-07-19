@@ -19,8 +19,6 @@ type MovieItemProps = {
 };
 
 export default function MovieItem({ movie, genreList }: MovieItemProps) {
-  console.log("movie in MovieItem", movie);
-
   const getGenreLabels = (
     ids: number[],
     genreList: { id: number; name: string }[]
@@ -50,8 +48,10 @@ export default function MovieItem({ movie, genreList }: MovieItemProps) {
         <GenreRow>
           <Genre>{getGenreLabels(movie.genre_ids, genreList)}</Genre>
         </GenreRow>
+        <DescriptionContainer>
         <MovieDescription>{movie.overview}</MovieDescription>
         <MovieRelease>{movie.release_date}</MovieRelease>
+        </DescriptionContainer>
       </RightCont>
     </MovieItemWrapper>
   );
@@ -78,7 +78,6 @@ const MoviePoster = styled.img`
 
 const RightCont = styled.div`
   display: inline-block;
-
 `;
 
 const MovieHeader = styled.div`
@@ -113,6 +112,12 @@ const Genre = styled.div`
   font-size: 1em;
   font-weight: 700;
   color: ${colors.primaryColor};
+`;
+
+const DescriptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const MovieDescription = styled.div`

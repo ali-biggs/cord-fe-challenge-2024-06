@@ -11,13 +11,15 @@ type MovieListProps = {
 };
 
 export default function MovieList({ movies, genres }: MovieListProps) {
-  //console.log("movies in movie list", movies)
-  const testArray = movies.slice(0, 1)
+  const testArray = movies.slice(0, 3);
   return (
     <MoviesWrapper>
-      {/* Finish the MovieItem component and use it here to display the movie results */}
       {testArray.map((movie, index) => {
-        return <MovieItem movie={movie} genreList={genres} />;
+        return (
+          <MovieContainer key={index}>
+            <MovieItem movie={movie} genreList={genres} />
+          </MovieContainer>
+        );
       })}
     </MoviesWrapper>
   );
@@ -25,4 +27,8 @@ export default function MovieList({ movies, genres }: MovieListProps) {
 
 const MoviesWrapper = styled.div`
   position: relative;
+`;
+
+const MovieContainer = styled.div`
+  padding-bottom: 15px;
 `;

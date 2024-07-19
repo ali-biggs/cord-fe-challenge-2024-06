@@ -46,8 +46,12 @@ export default function ExpandableFilters({
         <SectionLabel>Select genre(s)</SectionLabel>
       </SectionHeader>
       <ExpandableSection expanded={showGenres}>
-        {genres.map((genre) => {
-          return <Checkbox label={genre.name} id={genre.id} />;
+        {genres.map((genre, index) => {
+          return (
+            <div key={index}>
+              <Checkbox label={genre.name} id={genre.id} />
+            </div>
+          );
         })}
       </ExpandableSection>
 
@@ -59,8 +63,12 @@ export default function ExpandableFilters({
         <SectionLabel>Select min. vote</SectionLabel>
       </SectionHeader>
       <ExpandableSection expanded={showMinVote}>
-        {ratings.map((rating) => {
-          return <Checkbox label={rating.name.toString()} id={rating.id} />;
+        {ratings.map((rating, index) => {
+          return (
+            <div key={index}>
+              <Checkbox label={rating.name.toString()} id={rating.id} />
+            </div>
+          );
         })}
       </ExpandableSection>
 
@@ -72,8 +80,12 @@ export default function ExpandableFilters({
         <SectionLabel>Select language</SectionLabel>
       </SectionHeader>
       <ExpandableSection expanded={showLanguage}>
-        {languages.map((language) => {
-          return <Checkbox label={language.name} id={language.id} />;
+        {languages.map((language, index) => {
+          return (
+            <div key={index}>
+              <Checkbox label={language.name} id={language.id} />
+            </div>
+          );
         })}
       </ExpandableSection>
     </>

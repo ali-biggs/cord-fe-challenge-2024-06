@@ -50,12 +50,14 @@ export default function Discover() {
     const popularMovies = await fetcher.getPopularMovies();
     const movieGenres = await fetcher.getGenreOptions();
     const totalCount = await fetcher.getTotalMovieCount();
+    const languageOptions = await fetcher.getLanguageOptions()
 
     setState((prevState) => ({
       ...prevState,
       results: popularMovies,
       genreOptions: movieGenres,
       totalCount: totalCount,
+      languageOptions: languageOptions
     }));
   };
 
@@ -65,10 +67,10 @@ export default function Discover() {
 
   return (
     <DiscoverWrapper>
-      <MobilePageTitle>Discover</MobilePageTitle>
+      {/* <MobilePageTitle>Discover</MobilePageTitle> */}
+      {totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
       <GridContainer>
         <MovieResults>
-          {totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
           <MovieList
             movies={(results as []) || []}
             genres={(genreOptions as []) || []}
@@ -101,7 +103,9 @@ const GridContainer = styled.div`
 `;
 
 const TotalCounter = styled.div`
-  font-weight: 900;
+  font-weight: 200;
+  font-size: 0.8em;
+  padding-bottom: 15px;
 `;
 
 const MovieResults = styled.div``;
