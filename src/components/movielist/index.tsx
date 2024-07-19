@@ -10,10 +10,15 @@ type MovieListProps = {
   genres: [];
 };
 
-export default function MovieList({}: MovieListProps) {
+export default function MovieList({ movies, genres }: MovieListProps) {
+  //console.log("movies in movie list", movies)
+  const testArray = movies.slice(0, 1)
   return (
     <MoviesWrapper>
       {/* Finish the MovieItem component and use it here to display the movie results */}
+      {testArray.map((movie, index) => {
+        return <MovieItem movie={movie} genreList={genres} />;
+      })}
     </MoviesWrapper>
   );
 }

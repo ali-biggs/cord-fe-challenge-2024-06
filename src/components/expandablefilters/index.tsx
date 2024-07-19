@@ -32,7 +32,6 @@ export default function ExpandableFilters({
   ratings,
   languages,
 }: ExpandableFiltersProps) {
-  console.log("ratings in ExpandableFilters", ratings)
   const [showGenres, setShowGenres] = useState<boolean>(true);
   const [showMinVote, setShowMinVote] = useState<boolean>(false);
   const [showLanguage, setShowLanguage] = useState<boolean>(false);
