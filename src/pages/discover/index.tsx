@@ -6,6 +6,7 @@ import useMediaQuery from "../../utils/useMediaQuery";
 
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
+import BurgerMenuIcon from "../../components/burgerMenuIcon";
 
 export default function Discover() {
   // You don't need to keep the current structure of this state object. Feel free to restructure it as needed.
@@ -77,8 +78,15 @@ export default function Discover() {
 
   return (
     <DiscoverWrapper>
-      {isMobile && <MobilePageTitle>Discover</MobilePageTitle>}
-      {!isMobile && totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
+      {isMobile && (
+        <MobilePageHeader>
+          <BurgerMenuIcon />
+          <MobilePageTitle>Discover</MobilePageTitle>
+        </MobilePageHeader>
+      )}
+      {!isMobile && totalCount > 0 && (
+        <TotalCounter>{totalCount} movies</TotalCounter>
+      )}
       <GridContainer>
         <MovieResults>
           <MovieList
@@ -87,7 +95,9 @@ export default function Discover() {
           />
           {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
         </MovieResults>
-        {isMobile && totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
+        {isMobile && totalCount > 0 && (
+          <TotalCounter>{totalCount} movies</TotalCounter>
+        )}
         <MovieFilters>
           <SearchFilters
             genres={genreOptions}
@@ -149,10 +159,18 @@ const MovieResults = styled.div``;
 
 const MovieFilters = styled.div``;
 
-const MobilePageTitle = styled.header`
+const MobilePageHeader = styled.header`
+  @media ${media.mobile} {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+`;
+
+const MobilePageTitle = styled.div`
   @media ${media.mobile} {
     display: visibile;
     font-size: 30px;
-    padding-bottom: 15px;
   }
 `;

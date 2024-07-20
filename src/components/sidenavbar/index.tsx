@@ -6,6 +6,7 @@ import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 import useMediaQuery from "../../utils/useMediaQuery";
+import BurgerMenuIcon from "../burgerMenuIcon";
 
 interface NavIconProps {
   arrow?: boolean;
@@ -13,66 +14,69 @@ interface NavIconProps {
 }
 
 export default function SideNavBar() {
-  const [activeSideBar] = useState();
+  const [activeSideBar, setActiveSideBar] = useState();
 
   /* Write the necessary functions to show/hide the side bar on mobile devices */
   const isMobile = useMediaQuery("(max-width: 480px)");
 
   return (
-    <SideNavBarCont className={activeSideBar && "visible"}>
-      {/* Implement a hamburger icon slide in effect for mobile devices */}
-      <SideNavMainLink
-        className="menu_nav_link main_nav_link"
-        to="/"
-        activeClassName="active"
-        exact
-      >
-        Wesley
-        <NavIcon arrow></NavIcon>
-      </SideNavMainLink>
-      <SideNavMainLink
-        className="menu_nav_link"
-        to="/discover"
-        activeClassName="active"
-      >
-        Discover
-        <NavIcon search></NavIcon>
-      </SideNavMainLink>
-      <SideNavHeader>
-        <HeaderText>Watched</HeaderText>
-      </SideNavHeader>
-      <NavLink
-        className="menu_nav_link"
-        to="/watched/movies"
-        activeClassName="active"
-      >
-        Movies
-      </NavLink>
-      <NavLink
-        className="menu_nav_link"
-        to="/watched/tv-shows"
-        activeClassName="active"
-      >
-        Tv Shows
-      </NavLink>
-      <SideNavHeader>
-        <HeaderText>Saved</HeaderText>
-      </SideNavHeader>
-      <NavLink
-        className="menu_nav_link"
-        to="/saved/movies"
-        activeClassName="active"
-      >
-        Movies
-      </NavLink>
-      <NavLink
-        className="menu_nav_link"
-        to="/saved/tv-shows"
-        activeClassName="active"
-      >
-        Tv Shows
-      </NavLink>
-    </SideNavBarCont>
+    <>
+      {/* <BurgerMenuIcon /> */}
+      <SideNavBarCont className={activeSideBar && "visible"}>
+        {/* Implement a hamburger icon slide in effect for mobile devices */}
+        <SideNavMainLink
+          className="menu_nav_link main_nav_link"
+          to="/"
+          activeClassName="active"
+          exact
+        >
+          Wesley
+          <NavIcon arrow></NavIcon>
+        </SideNavMainLink>
+        <SideNavMainLink
+          className="menu_nav_link"
+          to="/discover"
+          activeClassName="active"
+        >
+          Discover
+          <NavIcon search></NavIcon>
+        </SideNavMainLink>
+        <SideNavHeader>
+          <HeaderText>Watched</HeaderText>
+        </SideNavHeader>
+        <NavLink
+          className="menu_nav_link"
+          to="/watched/movies"
+          activeClassName="active"
+        >
+          Movies
+        </NavLink>
+        <NavLink
+          className="menu_nav_link"
+          to="/watched/tv-shows"
+          activeClassName="active"
+        >
+          Tv Shows
+        </NavLink>
+        <SideNavHeader>
+          <HeaderText>Saved</HeaderText>
+        </SideNavHeader>
+        <NavLink
+          className="menu_nav_link"
+          to="/saved/movies"
+          activeClassName="active"
+        >
+          Movies
+        </NavLink>
+        <NavLink
+          className="menu_nav_link"
+          to="/saved/tv-shows"
+          activeClassName="active"
+        >
+          Tv Shows
+        </NavLink>
+      </SideNavBarCont>
+    </>
   );
 }
 

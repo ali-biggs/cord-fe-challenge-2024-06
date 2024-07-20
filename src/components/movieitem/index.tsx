@@ -1,10 +1,8 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import * as colors from "../../colors";
-
-interface MoviePosterProps {
-  imageUrl: string;
-}
+import useMediaQuery from "../../utils/useMediaQuery";
+import { applyLastLineFade } from "../../utils/lastLineFade";
 
 type MovieItemProps = {
   movie: {
@@ -19,6 +17,7 @@ type MovieItemProps = {
 };
 
 export default function MovieItem({ movie, genreList }: MovieItemProps) {
+  const isMobile: boolean = useMediaQuery("(max-width: 480px)");
   const getGenreLabels = (
     ids: number[],
     genreList: { id: number; name: string }[]
@@ -49,13 +48,25 @@ export default function MovieItem({ movie, genreList }: MovieItemProps) {
           <Genre>{getGenreLabels(movie.genre_ids, genreList)}</Genre>
         </GenreRow>
         <DescriptionContainer>
-        <MovieDescription>{movie.overview}</MovieDescription>
-        <MovieRelease>{movie.release_date}</MovieRelease>
+          <MovieDescription>
+            {isMobile ? applyLastLineFade(movie.overview) : movie.overview}
+          </MovieDescription>
+          <MovieRelease>{movie.release_date}</MovieRelease>
         </DescriptionContainer>
       </RightCont>
     </MovieItemWrapper>
   );
 }
+
+const breakpoints = {
+  mobile: "480px",
+  desktop: "1024px",
+};
+
+const media = {
+  mobile: `(max-width: ${breakpoints.mobile})`,
+  desktop: `(max-width: ${breakpoints.desktop})`,
+};
 
 const MovieItemWrapper = styled.div`
   position: relative;
@@ -106,12 +117,21 @@ const GenreRow = styled.div`
   display: flex;
   align-items: center;
   padding-left: 15px;
+
+  @media ${media.mobile} {
+    padding-top: 5px;
+  }
 `;
 
 const Genre = styled.div`
   font-size: 1em;
   font-weight: 700;
   color: ${colors.primaryColor};
+
+  @media ${media.mobile} {
+    font-size: 0.7em;
+    font-weight: 700;
+  }
 `;
 
 const DescriptionContainer = styled.div`
@@ -126,6 +146,11 @@ const MovieDescription = styled.div`
   padding-left: 15px;
   padding-right: 15px;
   color: ${colors.fontColor};
+
+  @media ${media.mobile} {
+    height: 100px;
+    overflow: hidden;
+  }
 `;
 
 const MovieRelease = styled.div`

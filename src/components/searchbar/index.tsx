@@ -20,7 +20,7 @@ type SearchBarProps = {
 export default function SearchBar({ searchMovies }: SearchBarProps) {
   const [keyWord, setKeyWord] = useState<string | undefined>("");
   const [releaseYear, setReleaseYear] = useState<string | undefined>("");
-  const isMobile = useMediaQuery("(max-width: 480px)");
+  const isMobile: boolean = useMediaQuery("(max-width: 480px)");
 
   const handleMovieSearch = async () => {
     let year;
