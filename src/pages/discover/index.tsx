@@ -8,7 +8,11 @@ import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
 import BurgerMenuIcon from "../../components/burgerMenuIcon";
 
-export default function Discover() {
+type DiscoverProps = {
+  toggleNavBar: () => void;
+};
+
+export default function Discover({toggleNavBar}: DiscoverProps) {
   // You don't need to keep the current structure of this state object. Feel free to restructure it as needed.
   const [state, setState] = useState({
     keyword: "",
@@ -80,7 +84,7 @@ export default function Discover() {
     <DiscoverWrapper>
       {isMobile && (
         <MobilePageHeader>
-          <BurgerMenuIcon />
+          <BurgerMenuIcon onClick={toggleNavBar} />
           <MobilePageTitle>Discover</MobilePageTitle>
         </MobilePageHeader>
       )}

@@ -2,9 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import * as colors from "../../colors";
 
-export default function BurgerMenuIcon() {
+type BurgerMenuIconProps = {
+  onClick: any;
+};
+
+export default function BurgerMenuIcon({onClick}: BurgerMenuIconProps) {
   return (
-    <BurgerMenu>
+    <BurgerMenu onClick={onClick}>
       <BurgerLine />
       <BurgerLine />
       <BurgerLine />
@@ -15,8 +19,7 @@ export default function BurgerMenuIcon() {
 const BurgerMenu = styled.button`
   background: none;
   border: none;
-  cursor: pointer;
-  padding: 0;
+  padding: 0px;
   width: 30px;
   height: 24px;
   display: flex;

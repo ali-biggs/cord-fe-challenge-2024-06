@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 
@@ -9,13 +9,21 @@ import Discover from "./pages/discover";
 import "./css/app.css";
 
 export default function App(props: any) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const toggleNavBar = () => setIsOpen(!isOpen);
+
   return (
     <Router>
       <PageContainer>
-        <SideNavBar {...props} />
+        <SideNavBar isOpen={isOpen} toggleNavBar={toggleNavBar} />
         <ContentWrapper>
           <Switch>
-            <Route path="/discover" component={Discover} {...props} />
+            <Route
+              path="/discover"
+              render={() => (
+                <Discover {...props} toggleNavBar={toggleNavBar} />
+              )}
+            />
           </Switch>
         </ContentWrapper>
       </PageContainer>

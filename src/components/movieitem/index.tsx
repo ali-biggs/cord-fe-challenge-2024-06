@@ -148,7 +148,7 @@ const MovieDescription = styled.div`
   color: ${colors.fontColor};
 
   @media ${media.mobile} {
-    height: 100px;
+    height: 105px;
     overflow: hidden;
   }
 `;

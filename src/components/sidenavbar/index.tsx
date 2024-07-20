@@ -1,29 +1,31 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import { NavLink as Link } from "react-router-dom";
-
+import BackButton from "../backButton";
 import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
 import useMediaQuery from "../../utils/useMediaQuery";
-import BurgerMenuIcon from "../burgerMenuIcon";
 
 interface NavIconProps {
   arrow?: boolean;
   search?: boolean;
 }
 
-export default function SideNavBar() {
-  const [activeSideBar, setActiveSideBar] = useState();
+interface SideNavBarContProps {
+  isOpen?: boolean;
+}
 
-  /* Write the necessary functions to show/hide the side bar on mobile devices */
-  const isMobile = useMediaQuery("(max-width: 480px)");
+type SideNavBarProps = {
+  isOpen: boolean;
+  toggleNavBar?: () => void;
+};
 
+export default function SideNavBar({ isOpen, toggleNavBar }: SideNavBarProps) {
+  const isMobile: boolean = useMediaQuery("(max-width: 480px)");
   return (
     <>
-      {/* <BurgerMenuIcon /> */}
-      <SideNavBarCont className={activeSideBar && "visible"}>
-        {/* Implement a hamburger icon slide in effect for mobile devices */}
+      <SideNavBarCont isOpen={isOpen}>
         <SideNavMainLink
           className="menu_nav_link main_nav_link"
           to="/"
@@ -75,6 +77,11 @@ export default function SideNavBar() {
         >
           Tv Shows
         </NavLink>
+        {isMobile && (
+          <BackButtonCon>
+            <BackButton onClick={toggleNavBar} />
+          </BackButtonCon>
+        )}
       </SideNavBarCont>
     </>
   );
@@ -90,7 +97,7 @@ const media = {
   desktop: `(max-width: ${breakpoints.desktop})`,
 };
 
-const SideNavBarCont = styled.div`
+const SideNavBarCont = styled.div<SideNavBarContProps>`
   position: fixed;
   z-index: 9;
   width: 280px;
@@ -98,7 +105,16 @@ const SideNavBarCont = styled.div`
   background-color: ${colors.sideNavBar};
 
   @media ${media.mobile} {
-    transform: translateX(-100%);
+    ${(props) =>
+      props.isOpen
+        ? css`
+            display: block;
+            width: 100%;
+            transition: right 2s ease-in-out;
+          `
+        : css`
+            transform: translateX(-100%);
+          `}
   }
 `;
 
@@ -109,6 +125,8 @@ const SideNavMainLink = styled(Link)`
   font-size: 1.6em;
   font-weight: 700;
   color: white;
+
+  /* background-color: ${(props) => (props.isActive ? `${colors.primaryColor}` : '')}; */
 
   &:hover {
     background: ${colors.primaryColor};
@@ -189,4 +207,10 @@ const NavLink = styled(Link)`
   font-size: 1.2em;
   font-weight: 300;
   color: white;
+`;
+
+const BackButtonCon = styled.div`
+  position: absolute;
+  bottom: 10px;
+  right: 30px;
 `;
