@@ -32,7 +32,7 @@ export default function ExpandableFilters({
   genres,
   ratings,
   languages,
-  searchMovies
+  searchMovies,
 }: ExpandableFiltersProps) {
   const [showGenres, setShowGenres] = useState<boolean>(true);
   const [showMinVote, setShowMinVote] = useState<boolean>(false);
@@ -44,10 +44,12 @@ export default function ExpandableFilters({
         <ExpandableIcon
           expanded={showGenres}
           onClick={() => setShowGenres((prev) => !prev)}
+          aria-expanded={showGenres}
+          aria-controls="genres-section"
         />
         <SectionLabel>Select genre(s)</SectionLabel>
       </SectionHeader>
-      <ExpandableSection expanded={showGenres}>
+      <ExpandableSection expanded={showGenres} id="genres-section">
         {genres.map((genre, index) => {
           return (
             <div key={index}>
@@ -61,10 +63,12 @@ export default function ExpandableFilters({
         <ExpandableIcon
           expanded={showMinVote}
           onClick={() => setShowMinVote((prev) => !prev)}
+          aria-expanded={showMinVote}
+          aria-controls="min-vote-section"
         />
         <SectionLabel>Select min. vote</SectionLabel>
       </SectionHeader>
-      <ExpandableSection expanded={showMinVote}>
+      <ExpandableSection expanded={showMinVote} id="min-vote-section">
         {ratings.map((rating, index) => {
           return (
             <div key={index}>
@@ -78,10 +82,12 @@ export default function ExpandableFilters({
         <ExpandableIcon
           expanded={showLanguage}
           onClick={() => setShowLanguage((prev) => !prev)}
+          aria-expanded={showLanguage}
+          aria-controls="language-section"
         />
         <SectionLabel>Select language</SectionLabel>
       </SectionHeader>
-      <ExpandableSection expanded={showLanguage}>
+      <ExpandableSection expanded={showLanguage} id="language-section">
         {languages.map((language, index) => {
           return (
             <div key={index}>

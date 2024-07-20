@@ -10,9 +10,10 @@ import BurgerMenuIcon from "../../components/burgerMenuIcon";
 
 type DiscoverProps = {
   toggleNavBar: () => void;
+  isOpen: boolean;
 };
 
-export default function Discover({toggleNavBar}: DiscoverProps) {
+export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
   // You don't need to keep the current structure of this state object. Feel free to restructure it as needed.
   const [state, setState] = useState({
     keyword: "",
@@ -62,18 +63,22 @@ export default function Discover({toggleNavBar}: DiscoverProps) {
 
   // Write a function to preload the popular movies when page loads & get the movie genres
   const initialLoad = async () => {
-    const popularMovies = await fetcher.getPopularMovies();
-    const movieGenres = await fetcher.getGenreOptions();
-    const totalCount = await fetcher.getTotalMovieCount();
-    const languageOptions = await fetcher.getLanguageOptions();
+    try {
+      const popularMovies = await fetcher.getPopularMovies();
+      const movieGenres = await fetcher.getGenreOptions();
+      const totalCount = await fetcher.getTotalMovieCount();
+      const languageOptions = await fetcher.getLanguageOptions();
 
-    setState((prevState) => ({
-      ...prevState,
-      results: popularMovies,
-      genreOptions: movieGenres,
-      totalCount: totalCount,
-      languageOptions: languageOptions,
-    }));
+      setState((prevState) => ({
+        ...prevState,
+        results: popularMovies,
+        genreOptions: movieGenres,
+        totalCount: totalCount,
+        languageOptions: languageOptions,
+      }));
+    } catch (error) {
+      console.log("Error fetching initial data: ", error);
+    }
   };
 
   useEffect(() => {
@@ -84,12 +89,18 @@ export default function Discover({toggleNavBar}: DiscoverProps) {
     <DiscoverWrapper>
       {isMobile && (
         <MobilePageHeader>
-          <BurgerMenuIcon onClick={toggleNavBar} />
+          <BurgerMenuIcon
+            onClick={toggleNavBar}
+            isOpen={isOpen}
+            aria-label="Open menu"
+          />
           <MobilePageTitle>Discover</MobilePageTitle>
         </MobilePageHeader>
       )}
       {!isMobile && totalCount > 0 && (
-        <TotalCounter>{totalCount} movies</TotalCounter>
+        <TotalCounter aria-label="Movie count">
+          {totalCount} movies
+        </TotalCounter>
       )}
       <GridContainer>
         <MovieResults>
@@ -97,10 +108,11 @@ export default function Discover({toggleNavBar}: DiscoverProps) {
             movies={(results as []) || []}
             genres={(genreOptions as []) || []}
           />
-          {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
         </MovieResults>
         {isMobile && totalCount > 0 && (
-          <TotalCounter>{totalCount} movies</TotalCounter>
+          <TotalCounter aria-label="Movie count">
+            {totalCount} movies
+          </TotalCounter>
         )}
         <MovieFilters>
           <SearchFilters
@@ -172,7 +184,7 @@ const MobilePageHeader = styled.header`
   }
 `;
 
-const MobilePageTitle = styled.div`
+const MobilePageTitle = styled.h1`
   @media ${media.mobile} {
     display: visibile;
     font-size: 30px;

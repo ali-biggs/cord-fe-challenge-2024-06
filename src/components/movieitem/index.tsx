@@ -31,21 +31,31 @@ export default function MovieItem({ movie, genreList }: MovieItemProps) {
   };
 
   return (
-    // The MovieItemWrapper must be linked to the movie details popup
-    <MovieItemWrapper>
+    <MovieItemWrapper
+      tabIndex={0}
+      aria-labelledby={`movie-title-${movie.title}`}
+    >
       <LeftCont>
         <MoviePoster
-          alt="Movie poster image"
+          alt={`${movie.title} poster`}
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         />
       </LeftCont>
       <RightCont>
         <MovieHeader>
-          <MovieTitle>{movie.title}</MovieTitle>
-          <RatingBox>{movie.vote_average.toFixed(1)}</RatingBox>
+          <MovieTitle id={`movie-title-${movie.title}`}>
+            {movie.title}
+          </MovieTitle>
+          <RatingBox id={`movie-rating-${movie.vote_average.toFixed(1)}`}>
+            {movie.vote_average.toFixed(1)}
+          </RatingBox>
         </MovieHeader>
         <GenreRow>
-          <Genre>{getGenreLabels(movie.genre_ids, genreList)}</Genre>
+          <Genre
+            id={`movie-genres-${getGenreLabels(movie.genre_ids, genreList)}`}
+          >
+            {getGenreLabels(movie.genre_ids, genreList)}
+          </Genre>
         </GenreRow>
         <DescriptionContainer>
           <MovieDescription>

@@ -3,12 +3,13 @@ import styled from "styled-components";
 import * as colors from "../../colors";
 
 type BurgerMenuIconProps = {
-  onClick: any;
+  onClick: () => void;
+  isOpen: boolean;
 };
 
-export default function BurgerMenuIcon({onClick}: BurgerMenuIconProps) {
+export default function BurgerMenuIcon({onClick, isOpen}: BurgerMenuIconProps) {
   return (
-    <BurgerMenu onClick={onClick}>
+    <BurgerMenu onClick={onClick} aria-label="Menu" aria-expanded={`${isOpen}`}>
       <BurgerLine />
       <BurgerLine />
       <BurgerLine />

@@ -3,12 +3,12 @@ import styled from "styled-components";
 import * as colors from "../../colors";
 
 type BackButtonProps = {
-  onClick: any;
+  onClick: () => void;
 };
 
 export default function BackButton({ onClick }: BackButtonProps) {
   return (
-    <ButtonContainer onClick={onClick}>
+    <ButtonContainer onClick={onClick} aria-label="Close menu">
       <Chevron />
       <Chevron />
       <Chevron />

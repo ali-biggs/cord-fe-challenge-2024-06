@@ -18,30 +18,37 @@ interface SideNavBarContProps {
 
 type SideNavBarProps = {
   isOpen: boolean;
-  toggleNavBar?: () => void;
+  toggleNavBar: () => void;
 };
 
 export default function SideNavBar({ isOpen, toggleNavBar }: SideNavBarProps) {
   const isMobile: boolean = useMediaQuery("(max-width: 480px)");
   return (
     <>
-      <SideNavBarCont isOpen={isOpen}>
+      <SideNavBarCont
+        isOpen={isOpen}
+        aria-expanded={isOpen}
+        role="navigation"
+        aria-label="Main Navigation"
+      >
         <SideNavMainLink
           className="menu_nav_link main_nav_link"
           to="/"
           activeClassName="active"
           exact
+          role="link"
         >
           Wesley
-          <NavIcon arrow></NavIcon>
+          <NavIcon arrow aria-hidden="false"></NavIcon>
         </SideNavMainLink>
         <SideNavMainLink
           className="menu_nav_link"
           to="/discover"
           activeClassName="active"
+          role="link"
         >
           Discover
-          <NavIcon search></NavIcon>
+          <NavIcon search aria-hidden="false"></NavIcon>
         </SideNavMainLink>
         <SideNavHeader>
           <HeaderText>Watched</HeaderText>
@@ -50,6 +57,7 @@ export default function SideNavBar({ isOpen, toggleNavBar }: SideNavBarProps) {
           className="menu_nav_link"
           to="/watched/movies"
           activeClassName="active"
+          role="link"
         >
           Movies
         </NavLink>
@@ -57,6 +65,7 @@ export default function SideNavBar({ isOpen, toggleNavBar }: SideNavBarProps) {
           className="menu_nav_link"
           to="/watched/tv-shows"
           activeClassName="active"
+          role="link"
         >
           Tv Shows
         </NavLink>
@@ -67,6 +76,7 @@ export default function SideNavBar({ isOpen, toggleNavBar }: SideNavBarProps) {
           className="menu_nav_link"
           to="/saved/movies"
           activeClassName="active"
+          role="link"
         >
           Movies
         </NavLink>
@@ -74,12 +84,13 @@ export default function SideNavBar({ isOpen, toggleNavBar }: SideNavBarProps) {
           className="menu_nav_link"
           to="/saved/tv-shows"
           activeClassName="active"
+          role="link"
         >
           Tv Shows
         </NavLink>
         {isMobile && (
           <BackButtonCon>
-            <BackButton onClick={toggleNavBar} />
+            <BackButton onClick={toggleNavBar} aria-label="Back button" />
           </BackButtonCon>
         )}
       </SideNavBarCont>
@@ -126,7 +137,8 @@ const SideNavMainLink = styled(Link)`
   font-weight: 700;
   color: white;
 
-  /* background-color: ${(props) => (props.isActive ? `${colors.primaryColor}` : '')}; */
+  /* background-color: ${(props) =>
+    props.isActive ? `${colors.primaryColor}` : ""}; */
 
   &:hover {
     background: ${colors.primaryColor};

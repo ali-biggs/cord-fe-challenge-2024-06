@@ -38,16 +38,24 @@ export default function SearchBar({ searchMovies }: SearchBarProps) {
           <KeyWordInput
             onBlur={handleMovieSearch}
             onChange={(e) => setKeyWord(e.target.value)}
+            aria-label="Search for movie using key word"
           />
         </SearchWrapper>
-        {isMobile && <FilterButton  />}
+        {isMobile && (
+          <FilterButton
+            aria-label="Filter options"
+            aria-hidden={`${!isMobile}`}
+            aria-expanded="false"
+          />
+        )}
       </MobileSearchWrapper>
       {!isMobile && (
-        <SearchWrapper>
+        <SearchWrapper aria-hidden={`${!isMobile}`}>
           <KeySearchIcon calendar />
           <YearInput
             onBlur={handleMovieSearch}
             onChange={(e) => setReleaseYear(e.target.value)}
+            aria-label="Search for movie using year"
           />
         </SearchWrapper>
       )}

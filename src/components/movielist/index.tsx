@@ -3,9 +3,7 @@ import styled from "styled-components";
 
 import MovieItem from "../movieitem";
 
-// Add types for the props of 'MovieList'
 type MovieListProps = {
-  // movies, genres
   movies: [];
   genres: [];
 };
@@ -13,10 +11,10 @@ type MovieListProps = {
 export default function MovieList({ movies, genres }: MovieListProps) {
   const testArray = movies.slice(0, 3);
   return (
-    <MoviesWrapper>
+    <MoviesWrapper role="list" aria-label="Movie list">
       {testArray.map((movie, index) => {
         return (
-          <MovieContainer key={index}>
+          <MovieContainer key={index} role="listitem">
             <MovieItem movie={movie} genreList={genres} />
           </MovieContainer>
         );

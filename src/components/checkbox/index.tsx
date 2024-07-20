@@ -8,13 +8,21 @@ type CheckBoxProps = {
 };
 
 export default function CheckBox({ label, id }: CheckBoxProps) {
-  // Create a custom checkbox component
   const [checked, setChecked] = useState<boolean>(false);
+
+  const handleCheckboxChange = () => {
+    setChecked(!checked);
+  };
 
   return (
     <CheckboxCont>
-      <Input />
-      <LabelText>{label}</LabelText>
+      <Input
+        value={id}
+        checked={checked}
+        onChange={handleCheckboxChange}
+        aria-checked={checked}
+      />
+      <LabelText htmlFor={`${id}`}>{label}</LabelText>
     </CheckboxCont>
   );
 }
@@ -55,6 +63,6 @@ const Input = styled.input.attrs({ type: "checkbox" })`
   }
 `;
 
-const LabelText = styled.div`
+const LabelText = styled.label`
   font-weight: 300;
 `;

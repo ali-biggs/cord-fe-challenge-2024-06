@@ -21,7 +21,7 @@ export default function App(props: any) {
             <Route
               path="/discover"
               render={() => (
-                <Discover {...props} toggleNavBar={toggleNavBar} />
+                <Discover {...props} isOpen={isOpen} toggleNavBar={toggleNavBar} />
               )}
             />
           </Switch>

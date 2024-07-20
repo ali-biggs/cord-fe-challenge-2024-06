@@ -36,7 +36,7 @@ export default function SearchFilters({
         <SearchBar searchMovies={searchMovies} />
       </SearchFiltersCont>
       <ExpandableFiltersCont className="expandable_filters_cont">
-        <CategoryTitle>Movies</CategoryTitle>
+        <CategoryTitle>Movie</CategoryTitle>
         <ExpandableFilters
           genres={genres}
           ratings={ratings}
@@ -82,7 +82,8 @@ const SearchFiltersCont = styled.div<SearchFiltersContProps>`
 
 const ExpandableFiltersCont = styled.div`
   background-color: white;
-  padding: 20px;
+  padding-top: 10px;
+  padding-left: 20px;
   border-radius: 3px;
   transition: all 0.3s ease-in-out;
 
@@ -91,6 +92,7 @@ const ExpandableFiltersCont = styled.div`
   }
 `;
 
-const CategoryTitle = styled.div`
+const CategoryTitle = styled.h2`
+font-size: 1.2em;
   margin-bottom: 10px;
 `;
