@@ -40,7 +40,7 @@ export default function SearchBar({ searchMovies }: SearchBarProps) {
             onChange={(e) => setKeyWord(e.target.value)}
           />
         </SearchWrapper>
-        {isMobile && <KeySearchIcon filter />}
+        {isMobile && <FilterButton  />}
       </MobileSearchWrapper>
       {!isMobile && (
         <SearchWrapper>
@@ -164,22 +164,23 @@ const KeySearchIcon = styled.div<KeySearchIconProps>`
         height: 20px;
       }
     `}
-
-    ${(props) =>
-    props.filter &&
-    css`
-      border-bottom: 2px solid ${colors.primaryColor};
-      margin-bottom: 5px;
-
-      &::before {
-        content: "";
-        display: inline-block;
-        background-image: url(${FilterIcon});
-        background-size: contain;
-        background-repeat: no-repeat;
-        width: 30px;
-        height: 30px;
-      }
-    `}
 `;
 
+const FilterButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  border-bottom: 2px solid ${colors.primaryColor};
+  margin-bottom: 5px;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    background-image: url(${FilterIcon});
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+  }
+`;

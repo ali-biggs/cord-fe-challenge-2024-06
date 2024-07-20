@@ -78,7 +78,7 @@ export default function Discover() {
   return (
     <DiscoverWrapper>
       {isMobile && <MobilePageTitle>Discover</MobilePageTitle>}
-      {totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
+      {!isMobile && totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
       <GridContainer>
         <MovieResults>
           <MovieList
@@ -87,6 +87,7 @@ export default function Discover() {
           />
           {/* Each movie must have a unique URL and if clicked a pop-up should appear showing the movie details and the action buttons as shown in the wireframe */}
         </MovieResults>
+        {isMobile && totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
         <MovieFilters>
           <SearchFilters
             genres={genreOptions}
@@ -139,8 +140,8 @@ const TotalCounter = styled.div`
 
   @media ${media.mobile} {
     font-weight: 200;
-    font-size: 0.6em;
-    padding-bottom: 10px;
+    font-size: 0.8em;
+    padding-bottom: 0px;
   }
 `;
 
