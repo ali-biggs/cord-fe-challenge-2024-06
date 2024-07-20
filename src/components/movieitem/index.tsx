@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import * as colors from "../../colors";
 import useMediaQuery from "../../utils/useMediaQuery";
 import { applyLastLineFade } from "../../utils/lastLineFade";

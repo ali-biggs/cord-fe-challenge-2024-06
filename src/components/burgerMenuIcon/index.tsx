@@ -9,7 +9,7 @@ type BurgerMenuIconProps = {
 
 export default function BurgerMenuIcon({onClick, isOpen}: BurgerMenuIconProps) {
   return (
-    <BurgerMenu onClick={onClick} aria-label="Menu" aria-expanded={`${isOpen}`}>
+    <BurgerMenu onClick={onClick} aria-label="Menu" aria-expanded={isOpen}>
       <BurgerLine />
       <BurgerLine />
       <BurgerLine />

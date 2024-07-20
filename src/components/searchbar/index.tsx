@@ -44,13 +44,13 @@ export default function SearchBar({ searchMovies }: SearchBarProps) {
         {isMobile && (
           <FilterButton
             aria-label="Filter options"
-            aria-hidden={`${!isMobile}`}
+            aria-hidden={!isMobile}
             aria-expanded="false"
           />
         )}
       </MobileSearchWrapper>
       {!isMobile && (
-        <SearchWrapper aria-hidden={`${!isMobile}`}>
+        <SearchWrapper aria-hidden={!isMobile}>
           <KeySearchIcon calendar />
           <YearInput
             onBlur={handleMovieSearch}

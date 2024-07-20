@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import * as colors from "../../colors";
 import styled from "styled-components";
 
 type CheckBoxProps = {

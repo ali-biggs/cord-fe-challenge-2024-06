@@ -3,8 +3,6 @@ import styled from "styled-components";
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
 import BurgerMenuIcon from "../../components/burgerMenuIcon";
-import Loading from "../../components/loading";
-import * as colors from "../../colors";
 import * as fetcher from "../../utils/fetcher";
 import useMediaQuery from "../../utils/useMediaQuery";
 
@@ -194,6 +192,6 @@ const MobilePageTitle = styled.h1`
   }
 `;
 
-// function Loading() {
-//   return <h2>🌀 Loading...</h2>;
-// }
+function Loading() {
+  return <h2>Loading...</h2>;
+}
