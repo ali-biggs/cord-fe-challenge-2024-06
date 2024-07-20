@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import styled from "styled-components";
+import SearchFilters from "../../components/searchfilter";
+import MovieList from "../../components/movielist";
+import BurgerMenuIcon from "../../components/burgerMenuIcon";
+import Loading from "../../components/loading";
 import * as colors from "../../colors";
 import * as fetcher from "../../utils/fetcher";
 import useMediaQuery from "../../utils/useMediaQuery";
 
-import SearchFilters from "../../components/searchfilter";
-import MovieList from "../../components/movielist";
-import BurgerMenuIcon from "../../components/burgerMenuIcon";
 
 type DiscoverProps = {
   toggleNavBar: () => void;
@@ -103,12 +104,14 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
         </TotalCounter>
       )}
       <GridContainer>
-        <MovieResults>
-          <MovieList
-            movies={(results as []) || []}
-            genres={(genreOptions as []) || []}
-          />
-        </MovieResults>
+        <Suspense fallback={<Loading />}>
+          <MovieResults>
+            <MovieList
+              movies={(results as []) || []}
+              genres={(genreOptions as []) || []}
+            />
+          </MovieResults>
+        </Suspense>
         {isMobile && totalCount > 0 && (
           <TotalCounter aria-label="Movie count">
             {totalCount} movies
@@ -190,3 +193,7 @@ const MobilePageTitle = styled.h1`
     font-size: 30px;
   }
 `;
+
+// function Loading() {
+//   return <h2>🌀 Loading...</h2>;
+// }
