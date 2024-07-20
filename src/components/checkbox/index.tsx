@@ -22,7 +22,7 @@ export default function CheckBox({ label, id }: CheckBoxProps) {
         onChange={handleCheckboxChange}
         aria-checked={checked}
       />
-      <LabelText htmlFor={`${id}`}>{label}</LabelText>
+      <LabelText htmlFor={`${label}`}>{label}</LabelText>
     </CheckboxCont>
   );
 }
