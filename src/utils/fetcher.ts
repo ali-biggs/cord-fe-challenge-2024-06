@@ -28,10 +28,12 @@ export const getLanguageOptions = async () => {
         },
       }
     );
-    const formattedLanguageOptions = response.data.map((item: any) => ({
-      id: item.iso_639_1,
-      name: item.english_name
-    })).sort((a: any, b: any) => a.name.localeCompare(b.name));
+    const formattedLanguageOptions = response.data
+      .map((item: any) => ({
+        id: item.iso_639_1,
+        name: item.english_name,
+      }))
+      .sort((a: any, b: any) => a.name.localeCompare(b.name));
     return formattedLanguageOptions;
   } catch (error) {
     console.log("Error retreiving languages: ", error);
@@ -57,19 +59,20 @@ export const getMovieByMinVote = async (vote: number) => {
 };
 
 export const getMovieByKeywordAndYear = async (
-  year?: number,
-  keyword?: string
+  keyword?: string,
+  year?: number
 ) => {
   try {
-    const response = await axios.get(
-      `${process.env.REACT_APP_TMDB_PUBLIC_URL}/discover/movie?year=${year}&sort_by=popularity.desc&with_keywords=${keyword}`,
-      {
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
-        },
-      }
-    );
+    const baseUrl = `${process.env.REACT_APP_TMDB_PUBLIC_URL}/discover/movie?sort_by=popularity.desc`;
+    const keyWordParam = keyword ? `&with_keywords=${keyword}` : "";
+    const yearParam = year ? `&year=${year}` : undefined;
+    const url = `${baseUrl}${yearParam}${keyWordParam}`;
+    const response = await axios.get(url, {
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
+      },
+    });
     return response.data.results;
   } catch (error) {
     console.log("Error retreiving min vote: ", error);

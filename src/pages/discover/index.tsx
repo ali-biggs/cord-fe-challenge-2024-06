@@ -34,8 +34,16 @@ export default function Discover() {
 
   const isMobile = useMediaQuery("(max-width: 480px)");
 
-  const searchMovies = async (keyword: string, year: number) => {
+  const searchMovies = async (
+    keyword: string | undefined,
+    year: number | undefined
+  ) => {
     // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
+    const searchResults = await fetcher.getMovieByKeywordAndYear(keyword, year);
+    setState((prevState) => ({
+      ...prevState,
+      results: searchResults,
+    }));
   };
 
   const {
@@ -70,7 +78,6 @@ export default function Discover() {
   return (
     <DiscoverWrapper>
       {isMobile && <MobilePageTitle>Discover</MobilePageTitle>}
-
       {totalCount > 0 && <TotalCounter>{totalCount} movies</TotalCounter>}
       <GridContainer>
         <MovieResults>
@@ -85,9 +92,10 @@ export default function Discover() {
             genres={genreOptions}
             ratings={ratingOptions}
             languages={languageOptions}
-            searchMovies={(keyword: string, year: number) =>
-              searchMovies(keyword, year)
-            }
+            searchMovies={(
+              keyword: string | undefined,
+              year: number | undefined
+            ) => searchMovies(keyword, year)}
           />
         </MovieFilters>
       </GridContainer>
@@ -119,11 +127,8 @@ const GridContainer = styled.div`
   grid-gap: 16px;
 
   @media ${media.mobile} {
-    /* display: flex;
-    flex-direction: column; */
-
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column-reverse;
   }
 `;
 
@@ -133,7 +138,9 @@ const TotalCounter = styled.div`
   padding-bottom: 15px;
 
   @media ${media.mobile} {
-    display: none;
+    font-weight: 200;
+    font-size: 0.6em;
+    padding-bottom: 10px;
   }
 `;
 
@@ -144,6 +151,7 @@ const MovieFilters = styled.div``;
 const MobilePageTitle = styled.header`
   @media ${media.mobile} {
     display: visibile;
-    background-color: lightcoral;
+    font-size: 30px;
+    padding-bottom: 15px;
   }
 `;

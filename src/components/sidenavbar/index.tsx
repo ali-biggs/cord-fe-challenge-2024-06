@@ -94,12 +94,7 @@ const SideNavBarCont = styled.div`
   background-color: ${colors.sideNavBar};
 
   @media ${media.mobile} {
-    /* transform: translateX(-100%); */
-    position: absolute;
-    top: 0px;
-    bottom: 0px;
-    left: -500px;
-    right: 0px;
+    transform: translateX(-100%);
   }
 `;
 

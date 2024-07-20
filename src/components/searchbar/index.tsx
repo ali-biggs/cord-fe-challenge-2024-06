@@ -1,32 +1,69 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import useMediaQuery from "../../utils/useMediaQuery";
 
 import * as colors from "../../colors";
 import SearchIcon from "../../images/search-icon-yellow.png";
 import CalendarIcon from "../../images/year-icon.png";
+import FilterIcon from "../../images/filter-icon.png";
 
 interface KeySearchIconProps {
   magnifyingGlass?: boolean;
   calendar?: boolean;
+  filter?: boolean;
 }
 
-export default function SearchBar() {
-  const [keyWord, setKeyWord] = useState<string>("");
-  const [releaseYear, setReleaseYear] = useState<number | null>(null);
+type SearchBarProps = {
+  searchMovies: (keyword: string | undefined, year: number | undefined) => void;
+};
+
+export default function SearchBar({ searchMovies }: SearchBarProps) {
+  const [keyWord, setKeyWord] = useState<string | undefined>("");
+  const [releaseYear, setReleaseYear] = useState<string | undefined>("");
+  const isMobile = useMediaQuery("(max-width: 480px)");
+
+  const handleMovieSearch = async () => {
+    let year;
+    if (releaseYear) {
+      year = parseInt(releaseYear);
+    }
+    searchMovies(keyWord, year);
+  };
 
   return (
     <>
-      <SearchWrapper>
-        <KeySearchIcon magnifyingGlass />
-        <KeyWordInput />
-      </SearchWrapper>
-      <SearchWrapper>
-        <KeySearchIcon calendar />
-        <YearInput />
-      </SearchWrapper>
+      <MobileSearchWrapper>
+        <SearchWrapper>
+          <KeySearchIcon magnifyingGlass />
+          <KeyWordInput
+            onBlur={handleMovieSearch}
+            onChange={(e) => setKeyWord(e.target.value)}
+          />
+        </SearchWrapper>
+        {isMobile && <KeySearchIcon filter />}
+      </MobileSearchWrapper>
+      {!isMobile && (
+        <SearchWrapper>
+          <KeySearchIcon calendar />
+          <YearInput
+            onBlur={handleMovieSearch}
+            onChange={(e) => setReleaseYear(e.target.value)}
+          />
+        </SearchWrapper>
+      )}
     </>
   );
 }
+
+const breakpoints = {
+  mobile: "480px",
+  desktop: "1024px",
+};
+
+const media = {
+  mobile: `(max-width: ${breakpoints.mobile})`,
+  desktop: `(max-width: ${breakpoints.desktop})`,
+};
 
 const SearchWrapper = styled.div`
   display: flex;
@@ -34,6 +71,14 @@ const SearchWrapper = styled.div`
   gap: 12px;
   border-bottom: 2px solid ${colors.primaryColor};
   margin-bottom: 10px;
+`;
+
+const MobileSearchWrapper = styled.div`
+  @media ${media.mobile} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 const KeyWordInput = styled.input.attrs({
@@ -119,4 +164,22 @@ const KeySearchIcon = styled.div<KeySearchIconProps>`
         height: 20px;
       }
     `}
+
+    ${(props) =>
+    props.filter &&
+    css`
+      border-bottom: 2px solid ${colors.primaryColor};
+      margin-bottom: 5px;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        background-image: url(${FilterIcon});
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 30px;
+        height: 30px;
+      }
+    `}
 `;
+

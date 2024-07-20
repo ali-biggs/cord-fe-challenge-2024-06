@@ -25,12 +25,14 @@ type ExpandableFiltersProps = {
     id: string;
     name: string;
   }[];
+  searchMovies: (keyword: string | undefined, year: number | undefined) => void;
 };
 
 export default function ExpandableFilters({
   genres,
   ratings,
   languages,
+  searchMovies
 }: ExpandableFiltersProps) {
   const [showGenres, setShowGenres] = useState<boolean>(true);
   const [showMinVote, setShowMinVote] = useState<boolean>(false);
