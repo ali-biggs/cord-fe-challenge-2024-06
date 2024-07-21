@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import * as colors from "../../colors";
 import ExpandableFilters from "../expandablefilters";
 import SearchBar from "../searchbar";
+import { media } from "../../utils/mediaBreakPoints";
 
 interface SearchFiltersContProps {
   marginBottom?: boolean;
@@ -48,16 +49,6 @@ export default function SearchFilters({
   );
 }
 
-const breakpoints = {
-  mobile: "480px",
-  desktop: "1024px",
-};
-
-const media = {
-  mobile: `(max-width: ${breakpoints.mobile})`,
-  desktop: `(max-width: ${breakpoints.desktop})`,
-};
-
 const FiltersWrapper = styled.div`
   position: relative;
 `;
@@ -93,6 +84,6 @@ const ExpandableFiltersCont = styled.div`
 `;
 
 const CategoryTitle = styled.h2`
-font-size: 1.2em;
+  font-size: 1.2em;
   margin-bottom: 10px;
 `;

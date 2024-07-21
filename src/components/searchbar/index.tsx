@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
+import { media } from "../../utils/mediaBreakPoints";
 import { useMediaQuery } from "../../utils/useMediaQuery";
 
 import * as colors from "../../colors";
@@ -62,16 +63,6 @@ export default function SearchBar({ searchMovies }: SearchBarProps) {
     </>
   );
 }
-
-const breakpoints = {
-  mobile: "480px",
-  desktop: "1024px",
-};
-
-const media = {
-  mobile: `(max-width: ${breakpoints.mobile})`,
-  desktop: `(max-width: ${breakpoints.desktop})`,
-};
 
 const SearchWrapper = styled.div`
   display: flex;

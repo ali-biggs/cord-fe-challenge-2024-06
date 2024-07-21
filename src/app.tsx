@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-
-import SideNavBar from "./components/sidenavbar";
-
 import Discover from "./pages/discover";
-
+import SideNavBar from "./components/sidenavbar";
+import { media } from "./utils/mediaBreakPoints";
 import "./css/app.css";
 
 export default function App(props: any) {
@@ -21,7 +19,11 @@ export default function App(props: any) {
             <Route
               path="/discover"
               render={() => (
-                <Discover {...props} isOpen={isOpen} toggleNavBar={toggleNavBar} />
+                <Discover
+                  {...props}
+                  isOpen={isOpen}
+                  toggleNavBar={toggleNavBar}
+                />
               )}
             />
           </Switch>
@@ -31,22 +33,17 @@ export default function App(props: any) {
   );
 }
 
-const breakpoints = {
-  mobile: "480px",
-  desktop: "1024px",
-};
-
-const media = {
-  mobile: `(max-width: ${breakpoints.mobile})`,
-  desktop: `(max-width: ${breakpoints.desktop})`,
-};
-
 const ContentWrapper = styled.main`
   padding-left: 280px;
 
   @media ${media.mobile} {
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  @media ${media.tabletPortrait} {
+    padding-left: 200px;
+    padding-right: 5px;
   }
 `;
 

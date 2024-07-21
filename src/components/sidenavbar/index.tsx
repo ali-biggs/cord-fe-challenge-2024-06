@@ -5,6 +5,7 @@ import BackButton from "../backButton";
 import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
+import { media } from "../../utils/mediaBreakPoints";
 import { useMediaQuery } from "../../utils/useMediaQuery";
 
 interface NavIconProps {
@@ -98,22 +99,16 @@ export default function SideNavBar({ isOpen, toggleNavBar }: SideNavBarProps) {
   );
 }
 
-const breakpoints = {
-  mobile: "480px",
-  desktop: "1024px",
-};
-
-const media = {
-  mobile: `(max-width: ${breakpoints.mobile})`,
-  desktop: `(max-width: ${breakpoints.desktop})`,
-};
-
 const SideNavBarCont = styled.div<SideNavBarContProps>`
   position: fixed;
   z-index: 9;
   width: 280px;
   height: 100%;
   background-color: ${colors.sideNavBar};
+
+  @media ${media.tabletPortrait} {
+    width: 200px;
+  }
 
   @media ${media.mobile} {
     ${(props) =>
@@ -153,6 +148,10 @@ const NavIcon = styled.div<NavIconProps>`
   position: absolute;
   right: 35px;
   top: 50%;
+
+  @media ${media.tabletPortrait} {
+    right: 8px;
+  }
 
   ${(props) =>
     props.arrow &&

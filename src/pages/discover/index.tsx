@@ -4,6 +4,7 @@ import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
 import BurgerMenuIcon from "../../components/burgerMenuIcon";
 import * as fetcher from "../../utils/fetcher";
+import { media } from "../../utils/mediaBreakPoints";
 import { useMediaQuery } from "../../utils/useMediaQuery";
 import { onRender } from "../../utils/onRender";
 
@@ -132,16 +133,6 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
     </Profiler>
   );
 }
-
-const breakpoints = {
-  mobile: "480px",
-  desktop: "1024px",
-};
-
-const media = {
-  mobile: `(max-width: ${breakpoints.mobile})`,
-  desktop: `(max-width: ${breakpoints.desktop})`,
-};
 
 const DiscoverWrapper = styled.div`
   padding: 60px 35px;

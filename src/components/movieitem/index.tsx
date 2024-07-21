@@ -3,6 +3,7 @@ import styled from "styled-components";
 import * as colors from "../../colors";
 import { useMediaQuery } from "../../utils/useMediaQuery";
 import { applyLastLineFade } from "../../utils/lastLineFade";
+import { media } from "../../utils/mediaBreakPoints";
 
 type MovieItemProps = {
   movie: {
@@ -67,16 +68,6 @@ export default function MovieItem({ movie, genreList }: MovieItemProps) {
     </MovieItemWrapper>
   );
 }
-
-const breakpoints = {
-  mobile: "480px",
-  desktop: "1024px",
-};
-
-const media = {
-  mobile: `(max-width: ${breakpoints.mobile})`,
-  desktop: `(max-width: ${breakpoints.desktop})`,
-};
 
 const MovieItemWrapper = styled.div`
   position: relative;
