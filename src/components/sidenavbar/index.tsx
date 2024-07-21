@@ -5,7 +5,7 @@ import BackButton from "../backButton";
 import * as colors from "../../colors";
 import Arrow from "../../images/arrow-icon.png";
 import SearchWhite from "../../images/search-icon-white.png";
-import useMediaQuery from "../../utils/useMediaQuery";
+import { useMediaQuery } from "../../utils/useMediaQuery";
 
 interface NavIconProps {
   arrow?: boolean;

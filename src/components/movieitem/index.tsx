@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import * as colors from "../../colors";
-import useMediaQuery from "../../utils/useMediaQuery";
+import { useMediaQuery } from "../../utils/useMediaQuery";
 import { applyLastLineFade } from "../../utils/lastLineFade";
 
 type MovieItemProps = {

@@ -1,11 +1,11 @@
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState, Suspense, Profiler } from "react";
 import styled from "styled-components";
 import SearchFilters from "../../components/searchfilter";
 import MovieList from "../../components/movielist";
 import BurgerMenuIcon from "../../components/burgerMenuIcon";
 import * as fetcher from "../../utils/fetcher";
-import useMediaQuery from "../../utils/useMediaQuery";
-
+import { useMediaQuery } from "../../utils/useMediaQuery";
+import { onRender } from "../../utils/onRender";
 
 type DiscoverProps = {
   toggleNavBar: () => void;
@@ -85,49 +85,51 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
   }, []);
 
   return (
-    <DiscoverWrapper>
-      {isMobile && (
-        <MobilePageHeader>
-          <BurgerMenuIcon
-            onClick={toggleNavBar}
-            isOpen={isOpen}
-            aria-label="Open menu"
-          />
-          <MobilePageTitle>Discover</MobilePageTitle>
-        </MobilePageHeader>
-      )}
-      {!isMobile && totalCount > 0 && (
-        <TotalCounter aria-label="Movie count">
-          {totalCount} movies
-        </TotalCounter>
-      )}
-      <GridContainer>
-        <Suspense fallback={<Loading />}>
-          <MovieResults>
-            <MovieList
-              movies={(results as []) || []}
-              genres={(genreOptions as []) || []}
+    <Profiler id="Discover page" onRender={onRender}>
+      <DiscoverWrapper>
+        {isMobile && (
+          <MobilePageHeader>
+            <BurgerMenuIcon
+              onClick={toggleNavBar}
+              isOpen={isOpen}
+              aria-label="Open menu"
             />
-          </MovieResults>
-        </Suspense>
-        {isMobile && totalCount > 0 && (
+            <MobilePageTitle>Discover</MobilePageTitle>
+          </MobilePageHeader>
+        )}
+        {!isMobile && totalCount > 0 && (
           <TotalCounter aria-label="Movie count">
             {totalCount} movies
           </TotalCounter>
         )}
-        <MovieFilters>
-          <SearchFilters
-            genres={genreOptions}
-            ratings={ratingOptions}
-            languages={languageOptions}
-            searchMovies={(
-              keyword: string | undefined,
-              year: number | undefined
-            ) => searchMovies(keyword, year)}
-          />
-        </MovieFilters>
-      </GridContainer>
-    </DiscoverWrapper>
+        <GridContainer>
+          <Suspense fallback={<Loading />}>
+            <MovieResults>
+              <MovieList
+                movies={(results as []) || []}
+                genres={(genreOptions as []) || []}
+              />
+            </MovieResults>
+          </Suspense>
+          {isMobile && totalCount > 0 && (
+            <TotalCounter aria-label="Movie count">
+              {totalCount} movies
+            </TotalCounter>
+          )}
+          <MovieFilters>
+            <SearchFilters
+              genres={genreOptions}
+              ratings={ratingOptions}
+              languages={languageOptions}
+              searchMovies={(
+                keyword: string | undefined,
+                year: number | undefined
+              ) => searchMovies(keyword, year)}
+            />
+          </MovieFilters>
+        </GridContainer>
+      </DiscoverWrapper>
+    </Profiler>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
-import useMediaQuery from "../../utils/useMediaQuery";
+import { useMediaQuery } from "../../utils/useMediaQuery";
 
 import * as colors from "../../colors";
 import SearchIcon from "../../images/search-icon-yellow.png";
