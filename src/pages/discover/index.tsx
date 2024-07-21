@@ -39,6 +39,7 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
     ],
   });
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [modalErrors, setModalErrors] = useState<string[]>([]);
   const isMobile = useMediaQuery("(max-width: 480px)");
 
   const searchMovies = async (
@@ -54,12 +55,7 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
         totalCount: searchResults.length,
       }));
     } else {
-      console.log("falls here");
-      setState((prevState) => ({
-        ...prevState,
-        results: searchResults,
-        totalCount: 0,
-      }));
+      setModalErrors(["There are no matches for this year"])
       setModalOpen(true);
     }
   };
@@ -96,6 +92,12 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
   useEffect(() => {
     initialLoad();
   }, []);
+
+  const handleModalClose = () => {
+    setModalErrors([])
+    setModalOpen(false);
+    initialLoad();
+  }
 
   return (
     <Profiler id="Discover page" onRender={onRender}>
@@ -143,11 +145,11 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
         </GridContainer>
       </DiscoverWrapper>
 
-      {isOpen && (
+      {modalOpen && (
         <ErrorModal
-          errors={["test"]}
-          isOpen={isOpen}
-          onClose={() => setModalOpen(false)}
+          errors={modalErrors}
+          isOpen={modalOpen}
+          onClose={() => handleModalClose()}
         />
       )}
     </Profiler>
