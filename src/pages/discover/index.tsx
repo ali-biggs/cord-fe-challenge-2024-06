@@ -7,6 +7,7 @@ import * as fetcher from "../../utils/fetcher";
 import { media } from "../../utils/mediaBreakPoints";
 import { useMediaQuery } from "../../utils/useMediaQuery";
 import { onRender } from "../../utils/onRender";
+import ErrorModal from "../../components/errorModal";
 
 type DiscoverProps = {
   toggleNavBar: () => void;
@@ -37,7 +38,7 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
       { id: "PO", name: "Polish" },
     ],
   });
-
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
   const isMobile = useMediaQuery("(max-width: 480px)");
 
   const searchMovies = async (
@@ -46,10 +47,21 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
   ) => {
     // Write a function to trigger the API request and load the search results based on the keyword and year given as parameters
     const searchResults = await fetcher.getMovieByKeywordAndYear(keyword, year);
-    setState((prevState) => ({
-      ...prevState,
-      results: searchResults,
-    }));
+    if (searchResults.length > 0) {
+      setState((prevState) => ({
+        ...prevState,
+        results: searchResults,
+        totalCount: searchResults.length,
+      }));
+    } else {
+      console.log("falls here");
+      setState((prevState) => ({
+        ...prevState,
+        results: searchResults,
+        totalCount: 0,
+      }));
+      setModalOpen(true);
+    }
   };
 
   const {
@@ -130,6 +142,14 @@ export default function Discover({ toggleNavBar, isOpen }: DiscoverProps) {
           </MovieFilters>
         </GridContainer>
       </DiscoverWrapper>
+
+      {isOpen && (
+        <ErrorModal
+          errors={["test"]}
+          isOpen={isOpen}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
     </Profiler>
   );
 }

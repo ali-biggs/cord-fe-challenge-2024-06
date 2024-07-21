@@ -4,6 +4,7 @@ import * as colors from "../../colors";
 import { useMediaQuery } from "../../utils/useMediaQuery";
 import { applyLastLineFade } from "../../utils/lastLineFade";
 import { media } from "../../utils/mediaBreakPoints";
+import { formatUkDate } from "../../utils/formatUkDate";
 
 type MovieItemProps = {
   movie: {
@@ -59,10 +60,14 @@ export default function MovieItem({ movie, genreList }: MovieItemProps) {
           </Genre>
         </GenreRow>
         <DescriptionContainer>
-          <MovieDescription>
+          <MovieDescription aria-label="Movie description">
             {isMobile ? applyLastLineFade(movie.overview) : movie.overview}
           </MovieDescription>
-          <MovieRelease>{movie.release_date}</MovieRelease>
+          <MovieRelease
+            id={`movie-release-date-${formatUkDate(movie.release_date)}`}
+          >
+            {formatUkDate(movie.release_date)}
+          </MovieRelease>
         </DescriptionContainer>
       </RightCont>
     </MovieItemWrapper>

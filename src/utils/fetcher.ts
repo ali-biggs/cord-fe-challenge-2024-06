@@ -73,9 +73,10 @@ export const getMovieByKeywordAndYear = async (
         Authorization: `Bearer ${process.env.REACT_APP_TMDB_ACCESS_TOKEN}`,
       },
     });
+    console.log("response", response.data.results)
     return response.data.results;
   } catch (error) {
-    console.log("Error retreiving min vote: ", error);
+    console.log("Error retreiving by keyword/year: ", error);
     return error;
   }
 };
